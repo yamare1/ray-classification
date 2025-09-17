@@ -1,46 +1,50 @@
-MAGIC Gamma Telescope Classification
+# Gamma Ray Classification Using Machine Learning
 
-End-to-end machine-learning pipeline to classify gamma rays vs. hadron particles from telescope measurements
-using the UCI MAGIC Gamma Telescope dataset
- (~19k samples, 10 features).
-Final model: Gradient Boosting, achieving ~0.89 accuracy and 0.94 ROC-AUC.
+High-performance binary classification system for distinguishing gamma ray signals from hadron background noise in telescope data. Demonstrates advanced ML techniques applicable to financial signal detection and anomaly identification.
 
-Highlights
+## Project Overview
 
-Full ML workflow: data loading & cleaning, feature standardization, exploratory analysis, PCA & t-SNE visualization.
+Built a production-ready classification pipeline achieving **93.8% ROC-AUC** for particle physics data, showcasing skills directly transferable to quantitative finance:
+- Signal detection in noisy data
+- Feature engineering from complex measurements
+- Model selection and hyperparameter optimization
+- Risk-adjusted performance metrics
 
-Modeling: Logistic Regression, K-Nearest Neighbors, SVM, Random Forest, and Gradient Boosting.
+## Key Results
 
-Hyperparameter tuning: Grid/Randomized search with stratified 5-fold cross-validation.
+- **Accuracy**: 88.7%
+- **ROC-AUC**: 93.8%
+- **Precision**: 89.0%
+- **Recall**: 94.3%
 
-Best model: Gradient Boosting (n_estimators=200, max_depth=7, learning_rate=0.1, subsample=0.8).
+## Technical Highlights
 
-Physics insight: Top features (fAlpha, fLength, fSize) align with astrophysical theory.
+### Data Processing
+- Handled 19,020 observations with 10 continuous features
+- Implemented robust standardization and outlier detection
+- Addressed class imbalance (65/35 split)
 
-Repository Structure
-notebooks/         # EDA and model exploration
-src/               # Reusable Python modules (data prep, training, plotting)
-configs/           # YAML configs for reproducible experiments
-results/           # Saved metrics, figures, and final models (if desired)
-data/              # Place raw data here (not committed); see instructions below
-requirements.txt   # Python dependencies
-README.md
+### Model Development
+- Evaluated 5 different algorithms with systematic hyperparameter tuning
+- Gradient Boosting emerged as optimal (200 estimators, max_depth=7)
+- Comprehensive cross-validation strategy (5-fold stratified)
 
-Quickstart
-git clone https://github.com/<your-username>/magic-gamma-classification.git
-cd magic-gamma-classification
-python3 -m venv .venv && source .venv/bin/activate
+### Feature Analysis
+- Identified key discriminative features through importance analysis
+- fAlpha (angle) and size parameters most predictive
+- Aligned findings with domain physics understanding
+
+## Installation & Usage
+```bash
+# Clone repository
+git clone https://github.com/yourusername/ray-classification.git
+cd ray-classification
+
+# Install dependencies
 pip install -r requirements.txt
 
-# Download dataset from UCI and place it in data/
-python scripts/run_experiment.py --config configs/gb_best.yaml
+# Run full pipeline
+python scripts/train_model.py --config configs/best_params.yaml
 
-
-Key figures (ROC curve, confusion matrix, feature importance) are stored in results/figures/.
-
-Key Results
-Model	Accuracy	ROC-AUC	F1 Score
-Logistic Regression	0.78	0.83	0.84
-SVM (RBF)	0.87	0.93	0.91
-Random Forest	0.88	0.94	0.91
-Gradient Boosting	0.89	0.94	0.92
+# Make predictions
+python scripts/predict.py --model results/models/best_model.pkl --data new_data.csv
