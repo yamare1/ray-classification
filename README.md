@@ -1,6 +1,6 @@
 # Gamma Ray Classification Using Machine Learning
 
-High-performance binary classification system for distinguishing gamma ray signals from hadron background noise in telescope data. Demonstrates advanced ML techniques applicable to financial signal detection and anomaly identification.
+High-performance binary classification system for distinguishing gamma ray signals from hadron background noise in telescope data.
 
 ## Project Overview
 
